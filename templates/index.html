@@ -1,20 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>{{homepage}}</h1>
-<a href="form/">Add New</a>
-<table border="1">
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Instrument</th>
-    </tr>
+<h1>{{title}}</h1>
+<ul>
+{% if musician_list %}
+{% for musician in musician_list %}
+    <li><a href="{% url 'app:album_list' artist_id=musician.id %}">{{musician.first_name}} {{musician.last_name}}</a></li>
+{% endfor %}
+{% else %}
+    <h4>No Musician in the List.</h4>
+{% endif %}
 
-    {% for row in musician %}
-    <tr>
-        <td> {{ row.first_name }} </td>
-        <td> {{ row.last_name }} </td>
-        <td> {{ row.instument }} </td>
-    </tr>
-    {% endfor %}
-</table>
 {% endblock %}
